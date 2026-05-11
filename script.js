@@ -26,8 +26,14 @@ document.querySelector('.check').addEventListener('click', function () {
   if (!guess) {
     // If the user doesn't guess anything, it is at first an empty string, which is converted to 0 when converted to a number.
     document.querySelector('.message').textContent = 'No number';
+
+    // Guess is the secret number -> Player wins
   } else if (guess === secret_number) {
     document.querySelector('.message').textContent = '🎉 Correct Number';
+    document.querySelector('body').style.backgroundColor = '#60b347';
+    document.querySelector('.number').style.width = '30rem';
+
+    // Guess is too high.
   } else if (guess > secret_number) {
     if (score > 1) {
       document.querySelector('.message').textContent = '📈 Too high';
@@ -38,6 +44,8 @@ document.querySelector('.check').addEventListener('click', function () {
         '😔 Game over. You lost.';
       document.querySelector('.score').textContent = 0;
     }
+
+    // Guess is too low.
   } else if (guess < secret_number) {
     if (score > 1) {
       document.querySelector('.message').textContent = '📉 Too low';
