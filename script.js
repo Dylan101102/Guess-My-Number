@@ -14,7 +14,6 @@ console.log(document.querySelector('.guess').value);
 
 // Defining secret number.
 const secret_number = Math.floor(Math.random() * 20) + 1; // Adding one shifts the random value range from 1 (inclusive) to 21 (exclusive).
-document.querySelector('.number').textContent = secret_number; // Will be shown while developing.
 
 // Set up the score in the code -> better to not rely on the DOM to hold the data.
 let score = 20;
@@ -32,6 +31,7 @@ document.querySelector('.check').addEventListener('click', function () {
     document.querySelector('.message').textContent = '🎉 Correct Number';
     document.querySelector('body').style.backgroundColor = '#60b347';
     document.querySelector('.number').style.width = '30rem';
+    document.querySelector('.number').textContent = secret_number; // Can be used outside of the event listener to test out certain updates.
 
     // Guess is too high.
   } else if (guess > secret_number) {
@@ -58,3 +58,15 @@ document.querySelector('.check').addEventListener('click', function () {
     }
   }
 });
+
+/*
+Coding Challenge #1
+
+Add in code to get the "Again" button to function properly, which should reset the game.
+Will need the below:
+
+1. Add event handler that deals with a mouse click.
+2. Restore the score and random number variables back to their initial values.4
+3. Restore any initial messages.
+4. Background color should be reset back to #222 with a number width of 15rem.
+*/
