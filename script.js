@@ -18,6 +18,9 @@ let secretNumber = Math.floor(Math.random() * 20) + 1; // Adding one shifts the 
 // Set up the score in the code -> better to not rely on the DOM to hold the data.
 let score = 20;
 
+// Set up initial high score.
+let highScore = 0;
+
 // Once the "Check" button is clicked, I want to do a score comparison.
 document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value); // Inputted values are strings at first.
@@ -32,6 +35,12 @@ document.querySelector('.check').addEventListener('click', function () {
     document.querySelector('body').style.backgroundColor = '#60b347';
     document.querySelector('.number').style.width = '30rem';
     document.querySelector('.number').textContent = secretNumber; // Can be used outside of the event listener to test out certain updates.
+
+    // High score functionality.
+    if (score > highScore) {
+      highScore = score;
+      document.querySelector('.highscore').textContent = highScore;
+    }
 
     // Guess is too high.
   } else if (guess > secretNumber) {
