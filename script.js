@@ -13,7 +13,7 @@ console.log(document.querySelector('.guess').value);
 */
 
 // Defining secret number.
-const secret_number = Math.floor(Math.random() * 20) + 1; // Adding one shifts the random value range from 1 (inclusive) to 21 (exclusive).
+let secretNumber = Math.floor(Math.random() * 20) + 1; // Adding one shifts the random value range from 1 (inclusive) to 21 (exclusive).
 
 // Set up the score in the code -> better to not rely on the DOM to hold the data.
 let score = 20;
@@ -27,14 +27,14 @@ document.querySelector('.check').addEventListener('click', function () {
     document.querySelector('.message').textContent = 'No number';
 
     // Guess is the secret number -> Player wins
-  } else if (guess === secret_number) {
+  } else if (guess === secretNumber) {
     document.querySelector('.message').textContent = '🎉 Correct Number';
     document.querySelector('body').style.backgroundColor = '#60b347';
     document.querySelector('.number').style.width = '30rem';
-    document.querySelector('.number').textContent = secret_number; // Can be used outside of the event listener to test out certain updates.
+    document.querySelector('.number').textContent = secretNumber; // Can be used outside of the event listener to test out certain updates.
 
     // Guess is too high.
-  } else if (guess > secret_number) {
+  } else if (guess > secretNumber) {
     if (score > 1) {
       document.querySelector('.message').textContent = '📈 Too high';
       score--;
@@ -46,7 +46,7 @@ document.querySelector('.check').addEventListener('click', function () {
     }
 
     // Guess is too low.
-  } else if (guess < secret_number) {
+  } else if (guess < secretNumber) {
     if (score > 1) {
       document.querySelector('.message').textContent = '📉 Too low';
       score--;
@@ -66,7 +66,31 @@ Add in code to get the "Again" button to function properly, which should reset t
 Will need the below:
 
 1. Add event handler that deals with a mouse click.
-2. Restore the score and random number variables back to their initial values.4
-3. Restore any initial messages.
+2. Restore the score and secretNumber variables back to their initial values.
+3. Restore the initial conditions of the message, number, score, and guess input field.
 4. Background color should be reset back to #222 with a number width of 15rem.
 */
+
+document.querySelector('.again').addEventListener('click', function () {
+  // Reset background color.
+  document.querySelector('body').style.backgroundColor = '#222';
+
+  // Reset number width.
+  document.querySelector('.number').style.width = '15rem';
+
+  // Reset message.
+  document.querySelector('.message').textContent = 'Start guessing...';
+
+  // Remove number from the input field.
+  document.querySelector('.guess').value = '';
+
+  // Put question mark back in to hide secret number.
+  document.querySelector('.number').textContent = '?';
+
+  // Need a new random number -> just reuse secretNumber.
+  secretNumber = Math.floor(Math.random() * 20) + 1;
+
+  // Reset score.
+  score = 20;
+  document.querySelector('.score').textContent = score;
+});
